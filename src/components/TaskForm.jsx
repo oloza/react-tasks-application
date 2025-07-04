@@ -1,12 +1,15 @@
 import {useState} from "react";
 
-function TaskForm() {
+function TaskForm({createTask}) {
     
 const [title, setTitle] = useState("")
+const [description, setDescription] = useState("")
 
 const handleSubmit=(e)=>{
     e.preventDefault();//evita reload form
-    console.log(title)
+  createTask({title,description})
+  setTitle("")
+  setDescription("")
  }  
 
 
@@ -15,7 +18,14 @@ const handleSubmit=(e)=>{
       <input
         placeholder="escribe tu tarea" 
         onChange={(e)=>setTitle(e.target.value)}
+        value={title}
+        autoFocus
       />
+      <textarea 
+      placeholder="write description"
+      onChange={(e)=>setDescription(e.target.value)}
+      value={description}
+      ></textarea>
       <button>Guardar</button>
     </form>
   );
